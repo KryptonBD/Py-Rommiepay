@@ -16,7 +16,7 @@ class PdfReport:
 
     # Title
     pdf.set_font(family='Times', size=24, style='B')
-    pdf.cell(w=0, h=80, txt='Py Bill Share', align='C', ln=1)
+    pdf.cell(w=0, h=80, txt='RoomiePay', align='C', ln=1)
 
     # Period Label
     pdf.set_font_size(20)
