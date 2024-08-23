@@ -65,10 +65,26 @@ class PdfReport:
     pdf.output(f'{self.filename}.pdf')
 
 
-bill = Bill(amount=480, period='08/24')
+# Taking inputs
+amount = input('Please Enter Total amount: ')
+period = input('Please Enter the period, e.g. April 2024: ')
 
-bruce = FlatMate(name='Bruce', days_in_house=21)
-oliver = FlatMate(name='Oliver', days_in_house=26)
+bill = Bill(amount=float(amount), period=period)
+print(f'{amount} for {period}')
 
-report = PdfReport('test')
-report.generate(bruce, oliver, bill)
+flat_mate1_name = input('Please Enter the name of first flatmate: ')
+flat_mate1_duration = input(f'Please enter the duration {flat_mate1_name} stayed: ')
+
+flat_mate1 = FlatMate(name=flat_mate1_name, days_in_house=float(flat_mate1_duration))
+print(f'{flat_mate1.name} stayed for {flat_mate1.days_in_house} days')
+
+flat_mate2_name = input('Please enter the name of second flatmate: ')
+flat_mate2_duration = input(f'Please enter the duration {flat_mate2_name} stayed: ')
+
+flat_mate2 = FlatMate(name=flat_mate2_name, days_in_house=float(flat_mate2_duration))
+print(f'{flat_mate2.name} stayed for {flat_mate2.days_in_house} days')
+
+print('Genrating Report....')
+
+report = PdfReport(period)
+report.generate(flat_mate1, flat_mate2, bill)
