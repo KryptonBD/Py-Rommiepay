@@ -20,7 +20,7 @@ class FlatMate:
     self.name = name
     self.days_in_house = days_in_house
 
-  def pays(self, bill: Bill, other_flat_mate: Self) -> float | int:
-    total_days = self.days_in_house + other_flat_mate.days_in_house
+  def pays(self, bill: Bill, flatmates: list[Self]) -> float | int:
+    total_days = sum(flatmate.days_in_house for flatmate in flatmates)
 
     return bill.amount * (self.days_in_house / total_days)

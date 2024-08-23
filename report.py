@@ -10,7 +10,7 @@ class PdfReport:
   def __init__(self, filename):
     self.filename = filename
 
-  def generate(self, fm1: FlatMate, fm2: FlatMate, bill: Bill):
+  def generate(self, flatmates: list[FlatMate], bill: Bill):
     pdf = FPDF(unit='pt')
     pdf.add_page()
 
@@ -25,16 +25,13 @@ class PdfReport:
 
     pdf.set_font(family='Times', size=16)
 
-    # Person 1 bill
-    fm1_bill = round(fm1.pays(bill, fm2), 2)
-    pdf.cell(w=100, h=40, txt=fm1.name)
-    pdf.cell(w=150, h=40, txt=str(fm1_bill), ln=1)
+    for flatmate in flatmates:
+      flatmate_bill = round(flatmate.pays(bill, flatmates), 2)
 
-    # Person 2 bill
-    fm2_bill = round(fm2.pays(bill, fm1), 2)
-    pdf.cell(w=100, h=40, txt=fm2.name)
-    pdf.cell(w=150, h=40, txt=str(fm2_bill), ln=1)
+      print(f'{flatmate.name} pays: {flatmate_bill}')
 
+      pdf.cell(w=100, h=40, txt=flatmate.name)
+      pdf.cell(w=150, h=40, txt=str(flatmate_bill), ln=1)
 
     # Output
     pdf.output(f'{self.filename}.pdf')

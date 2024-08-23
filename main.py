@@ -4,23 +4,25 @@ from report import PdfReport
 # Taking inputs
 amount = input('Please Enter Total amount: ')
 period = input('Please Enter the period, e.g. April 2024: ')
+flat_size = input('How many people live in the flat? ')
+
 
 bill = Bill(amount=float(amount), period=period)
 print(f'{amount} for {period}')
 
-flat_mate1_name = input('Please Enter the name of first flatmate: ')
-flat_mate1_duration = input(f'Please enter the duration {flat_mate1_name} stayed: ')
+flatmates = []
 
-flat_mate1 = FlatMate(name=flat_mate1_name, days_in_house=float(flat_mate1_duration))
-print(f'{flat_mate1.name} stayed for {flat_mate1.days_in_house} days')
+for _ in range(0, int(flat_size)):
+  flatmate_name = input('Please enter the flatemate name: ')
+  flatmate_duration = input(f'Please enter the duration {flatmate_name} stayed: ')
 
-flat_mate2_name = input('Please enter the name of second flatmate: ')
-flat_mate2_duration = input(f'Please enter the duration {flat_mate2_name} stayed: ')
+  flatmate = FlatMate(name=flatmate_name, days_in_house=int(flatmate_duration))
+  print(f'{flatmate.name} stayed for {flatmate.days_in_house}')
+  
+  flatmates.append(flatmate)
 
-flat_mate2 = FlatMate(name=flat_mate2_name, days_in_house=float(flat_mate2_duration))
-print(f'{flat_mate2.name} stayed for {flat_mate2.days_in_house} days')
 
 print('Genrating Report....')
 
 report = PdfReport(period)
-report.generate(flat_mate1, flat_mate2, bill)
+report.generate(flatmates=flatmates, bill=bill)
