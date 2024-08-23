@@ -41,14 +41,14 @@ class PdfReport:
 
     # Title
     pdf.set_font(family='Times', size=24, style='B')
-    pdf.cell(w=0, h=80, txt='Py Bill Share', border=1, align='C', ln=1)
+    pdf.cell(w=0, h=80, txt='Py Bill Share', align='C', ln=1)
 
     # Period Label
     pdf.set_font_size(20)
-    pdf.cell(w=100, h=40, border=1, txt='Period')
-    pdf.cell(w=0, h=40, border=1, align='R', txt=bill.period, ln=1)
+    pdf.cell(w=100, h=40, txt='Period')
+    pdf.cell(w=0, h=40, align='R', txt=bill.period, ln=1)
 
-    pdf.set_font_size(16)
+    pdf.set_font(family='Times', size=16)
 
     # Person 1 bill
     fm1_bill = round(fm1.pays(bill, fm2), 2)
@@ -70,5 +70,5 @@ bill = Bill(amount=480, period='08/24')
 bruce = FlatMate(name='Bruce', days_in_house=21)
 oliver = FlatMate(name='Oliver', days_in_house=26)
 
-report = PdfReport('sample')
+report = PdfReport('test')
 report.generate(bruce, oliver, bill)
